@@ -5,11 +5,11 @@ app = FastAPI()
 
 # Cargar los datos necesarios
 tabla_funciones = pd.read_parquet('tabla_funciones.parquet')
-F3 = pd.read_parquet('/Parquets/F3.parquet')
-F4 = pd.read_parquet('/Parquets/F4.parquet')
-F5 = pd.read_parquet('/Parquets/F5.parquet')
-matrix_norm = pd.read_parquet('/Parquets/matrix_norm.parquet')
-item_sim_df = pd.read_parquet('/Parquets/item_sim_df.parquet')
+F3 = pd.read_parquet('/F3.parquet')
+F4 = pd.read_parquet('/F4.parquet')
+F5 = pd.read_parquet('/F5.parquet')
+matrix_norm = pd.read_parquet('/matrix_norm.parquet')
+item_sim_df = pd.read_parquet('/item_sim_df.parquet')
 
 # Función 1
 @app.get('/PlayTimeGenre')
