@@ -40,6 +40,18 @@ def UsersRecommend(año: int):
     
     return result
 
+def UsersWorstDeveloper(año: int):
+    '''Recordemos, que esta funcion solo retorna la lista para los años 2010 a 2015'''
+    df_filtered = F4[(F4['Year_Posted'] == año) & (F4['Recommend'] == False) & (F4['Sentiment_Analysis'] == 0)]
+    developer_counts = df_filtered['Developer'].value_counts()
+    worst_dev = developer_counts[:3].index.tolist()
+    result = []
+    if len(worst_dev) > 0: result.append({"Puesto 1": worst_dev[0]})
+    if len(worst_dev) > 1: result.append({"Puesto 2": worst_dev[1]})
+    if len(worst_dev) > 2: result.append({"Puesto 3": worst_dev[2]})
+    
+    return result
+
 # Función 5
 @app.get('/sentiment_analysis')
 def sentiment_analysis(desarrolladora: str):
