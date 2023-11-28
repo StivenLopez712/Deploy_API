@@ -12,7 +12,7 @@ matrix_norm = pd.read_parquet('matrix_norm.parquet')
 item_sim_df = pd.read_parquet('item_sim_df.parquet')
 
 
-@app.get('/')
+@app.get('/Bienvenida:')
 def read_root():
     """¡ Bienvenidos a API STEAM GAMES!
     Aquí encontrarás diferentes funciones que proporcionan información 
