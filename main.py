@@ -113,7 +113,7 @@ def recomendacion_juego(id_producto):
     - id_producto: Corresponde al nombre del videojuego como cadena de Texto.
     '''
     count = 1
-    result = {'juegos_recomendados': []}
+    result = {'': ':', 'juegos_recomendados': []}
     for item in item_sim_df.sort_values(by=id_producto, ascending=False).index[1:6]:
         result['juegos_recomendados'].append(''.join(item))
         count += 1
