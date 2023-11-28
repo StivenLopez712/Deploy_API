@@ -46,12 +46,14 @@ def user_for_genre(genero: str):
     Parámetros de entrada:
     - género (cadena de texto), por ejemplo Action, Casual, RPG, Strategy, etc.
     '''
-    dfgenero2 = tabla_funciones[tabla_funciones['Genres'].str.contains(genero, case=False, na=False)]
-    user_time = dfgenero2.groupby('User_Id')['Playtime_Forever'].sum()
-    maxtime = user_time.idxmax()
-    playtime_year = dfgenero2.groupby('Release_Year')['Playtime_Forever'].sum().reset_index()
-    result = {"Usuario con más horas jugadas para Género " + genero: maxtime,
-              "Horas jugadas": playtime_year.to_dict(orient='records')}
+    genre_data = tabla_funciones[tabla_funciones['Genres'].str.contains(genre, case=False, na=False)]
+    user_time = genre_data.groupby('User_Id')['Playtime_Forever'].sum()
+    max_user_time = user_time.idxmax()
+    playtime_by_year = genre_data.groupby('Release_Year')['Playtime_Forever'].sum().reset_index()
+    result = {
+       ' El usuario con mas hras es': max_user_time,
+       ' con un total de ': playtime_by_year.to_dict('records')
+    }
     return result
 
 
