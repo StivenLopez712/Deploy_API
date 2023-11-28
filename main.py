@@ -46,7 +46,7 @@ def user_for_genre(genero: str):
     Parámetros de entrada:
     - género (cadena de texto), por ejemplo Action, Casual, RPG, Strategy, etc.
     '''
-    genre_data = tabla_funciones[tabla_funciones['Genres'].str.contains(genre, case=False, na=False)]
+    genre_data = tabla_funciones[tabla_funciones['Genres'].str.contains(genero, case=False, na=False)]
     user_time = genre_data.groupby('User_Id')['Playtime_Forever'].sum()
     max_user_time = user_time.idxmax()
     playtime_by_year = genre_data.groupby('Release_Year')['Playtime_Forever'].sum().reset_index()
