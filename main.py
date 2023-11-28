@@ -29,6 +29,7 @@ def user_for_genre(genero: str):
               "Horas jugadas": playtime_year.to_dict(orient='records')}
     return result
 
+
 # Función 3
 @app.get('/UsersRecommend')
 def UsersRecommend(año: int):
@@ -39,7 +40,9 @@ def UsersRecommend(año: int):
     result = [{"Puesto 1": top_3[0]}, {"Puesto 2": top_3[1]}, {"Puesto 3": top_3[2]}]
     
     return result
+
 #Funcion 4
+@app.get('/WorstDeveloper')
 def UsersWorstDeveloper(año: int):
     '''Recordemos, que esta funcion solo retorna la lista para los años 2010 a 2015'''
     df_filtered = F4[(F4['Year_Posted'] == año) & (F4['Recommend'] == False) & (F4['Sentiment_Analysis'] == 0)]
