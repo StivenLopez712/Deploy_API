@@ -29,17 +29,16 @@ def user_for_genre(genero: str):
               "Horas jugadas": playtime_year.to_dict(orient='records')}
     return result
 
-
 # Función 3
 @app.get('/UsersRecommend')
-def users_recommend(año: int):
-    merged_df = pd.merge(DF_GAMES, DF_REVIEWS, on='Item_Id')
-    year_df = merged_df[merged_df['Year_Posted'] == año]
-    positive_neutral_df = year_df[(year_df['Sentiment_Analysis'].isin([1, 2])) & (year_df['Recommend'])]
-    top_games = positive_neutral_df.groupby('App_Name')['Recommend'].sum().reset_index()
-    top_games = top_games.sort_values(by='Recommend', ascending=False).head(3)
-    result_list = [{"Puesto {}: ".format(i+1): game} for i, game in enumerate(top_games['App_Name'])]
-    return result_list
+def UsersRecommend(año: int):
+    '''Recordemos, que esta funcion solo retorna la lista para los años 2010 a 2015'''
+    df_filtered = F3[(F3['Year_Posted'] == año) & (F3['Recommend'] == True) & (F3['Sentiment_Analysis'] >= 1)]
+    game_counts = df_filtered['Item_Name'].value_counts()
+    top_3 = game_counts[:3].index.tolist()
+    result = [{"Puesto 1": top_3[0]}, {"Puesto 2": top_3[1]}, {"Puesto 3": top_3[2]}]
+    
+    return result
 
 # Función 5
 @app.get('/sentiment_analysis')
