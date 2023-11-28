@@ -18,6 +18,17 @@ def play_time_genre(genero: str):
         .groupby('Release_Year')['Playtime_Forever'].sum().idxmax()
     result = {"Año de lanzamiento con más horas jugadas para Género " + genero: int(max_year)}
     return result
+# Función 2
+@app.get('/UserForGenre')
+def user_for_genre(genero: str):
+    dfgenero2 = tabla_funciones[tabla_funciones['Genres'].str.contains(genero, case=False, na=False)]
+    user_time = dfgenero2.groupby('User_Id')['Playtime_Forever'].sum()
+    maxtime = user_time.idxmax()
+    playtime_year = dfgenero2.groupby('Release_Year')['Playtime_Forever'].sum().reset_index()
+    result = {"Usuario con más horas jugadas para Género " + genero: maxtime,
+              "Horas jugadas": playtime_year.to_dict(orient='records')}
+    return result
+
 # Función 5
 @app.get('/sentiment_analysis')
 def sentiment_analysis(desarrolladora: str):
